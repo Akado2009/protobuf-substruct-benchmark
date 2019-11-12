@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package GeneralParser;
+
+import "innerstruct.proto";
+import "anotherinnerstruct.proto";
+
+message GeneralMessage {
+    // InnerStruct.InnerMessage inner = 1;
+    // AnotherInnerStruct.AnotherInnerMessage anotherInner = 2;
+}

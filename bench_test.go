@@ -41,7 +41,8 @@ func BenchmarkAnySmallInnerWoAllocation(b *testing.B) {
 		}
 
 		newInner := InnerStruct.InnerMessage{}
-		err := ptypes.UnmarshalAny(parser.Msg, &newInner)
+		err = proto.Unmarshal(parser.Msg.Value, &newInner)
+		// err := ptypes.UnmarshalAny(parser.Msg, &newInner)
 
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
@@ -101,7 +102,8 @@ func BenchmarkAnySmallInnerWAllocation(b *testing.B) {
 			log.Fatal("unmarshaling error: ", err)
 		}
 		newInner := InnerStruct.InnerMessage{}
-		err = ptypes.UnmarshalAny(parser.Msg, &newInner)
+		err = proto.Unmarshal(parser.Msg.Value, &newInner)
+		// err = ptypes.UnmarshalAny(parser.Msg, &newInner)
 
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
@@ -166,7 +168,9 @@ func BenchmarkAnyLargeInnerWoAllocation(b *testing.B) {
 			log.Fatal("unmarshaling error: ", err)
 		}
 		newAInner := AnotherInnerStruct.AnotherInnerMessage{}
-		err = ptypes.UnmarshalAny(parser.Msg, &newAInner)
+		err = proto.Unmarshal(parser.Msg.Value, &newAInner)
+
+		// err = ptypes.UnmarshalAny(parser.Msg, &newAInner)
 
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
@@ -234,7 +238,9 @@ func BenchmarkAnyLargeInnerWAllocation(b *testing.B) {
 			log.Fatal("unmarshaling error: ", err)
 		}
 		newAInner := AnotherInnerStruct.AnotherInnerMessage{}
-		err = ptypes.UnmarshalAny(parser.Msg, &newAInner)
+		err = proto.Unmarshal(parser.Msg.Value, &newAInner)
+
+		// err = ptypes.UnmarshalAny(parser.Msg, &newAInner)
 
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
@@ -263,7 +269,7 @@ func BenchmarkByteLargeInnerWAllocation(b *testing.B) {
 		buf := make([]byte, bufferSize, bufferSize)
 		copy(buf[:], constName)
 		overallData := append(buf, data...)
-		structName := string(bytes.Trim(overallData[:bufferSize], "\x00")[:])
+		structName := string(bytes.TrimRight(overallData[:bufferSize], "\x00")[:])
 		structSelf := overallData[bufferSize:]
 		newInner := InnerStruct.InnerMessage{}
 		err = proto.Unmarshal(structSelf, &newInner)
