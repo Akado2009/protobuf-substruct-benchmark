@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option go_package = "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/firstmessage";
+
+package firstmessage;
+
+message FirstMessage {
+    string name = 1;
+    int32 id = 2;
+    string second_name = 3;
+}
