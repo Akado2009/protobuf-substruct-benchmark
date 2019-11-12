@@ -8,6 +8,12 @@ import (
 	AnotherInnerStruct "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/generated-code/anotherinner"
 	InnerStruct "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/generated-code/inner"
 	UniversalParser "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/generated-code/universal"
+
+	firstmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/firstmessage"
+	general "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/general"
+
+	secondmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/secondmessage"
+
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 )
@@ -80,6 +86,38 @@ func BenchmarkByteSmallInnerWoAllocation(b *testing.B) {
 	}
 }
 
+func BenchmarkGeneralSmallInnerWoAllocation(b *testing.B) {
+	inner := firstmessage.FirstMessage{
+		Name:       constName,
+		Id:         int32(100),
+		SecondName: "secondRandomName",
+	}
+	generalStruct := general.General{
+		Fmsg: &inner,
+	}
+	data, err := proto.Marshal(&generalStruct)
+	if err != nil {
+		log.Fatal("marshaling error: ", err)
+	}
+	for i := 0; i < b.N; i++ {
+		parser := general.General{}
+		err = proto.Unmarshal(data, &parser)
+
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+		if parser.Fmsg != nil {
+			if parser.Fmsg.Name != constName {
+				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Fmsg.Name)
+			}
+		}
+	}
+}
+
 func BenchmarkAnySmallInnerWAllocation(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		inner := &InnerStruct.InnerMessage{
@@ -138,6 +176,38 @@ func BenchmarkByteSmallInnerWAllocation(b *testing.B) {
 		}
 		if structName != constName {
 			b.Fatalf("Error: expcted name %s, but got %s", constName, structName)
+		}
+	}
+}
+
+func BenchmarkGeneralSmallInnerWAllocation(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		inner := firstmessage.FirstMessage{
+			Name:       constName,
+			Id:         int32(100),
+			SecondName: "secondRandomName",
+		}
+		generalStruct := general.General{
+			Fmsg: &inner,
+		}
+		data, err := proto.Marshal(&generalStruct)
+		if err != nil {
+			log.Fatal("marshaling error: ", err)
+		}
+		parser := general.General{}
+		err = proto.Unmarshal(data, &parser)
+
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+		if parser.Fmsg != nil {
+			if parser.Fmsg.Name != constName {
+				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Fmsg.Name)
+			}
 		}
 	}
 }
@@ -212,6 +282,42 @@ func BenchmarkByteLargeInnerWoAllocation(b *testing.B) {
 	}
 }
 
+func BenchmarkGeneralLargeInnerWoAllocation(b *testing.B) {
+	aInner := secondmessage.SecondMessage{
+		Name:       "randomName",
+		Id:         int32(100),
+		SecondName: "secondRandomName",
+		ThirdName:  "thirdRandomName",
+		IdFloat:    float32(100.02),
+		FourthName: "fourthRandomName",
+		FifthName:  "fifthRandomName",
+	}
+	generalStruct := general.General{
+		Smsg: &aInner,
+	}
+	data, err := proto.Marshal(&generalStruct)
+	if err != nil {
+		log.Fatal("marshaling error: ", err)
+	}
+	for i := 0; i < b.N; i++ {
+		parser := general.General{}
+		err = proto.Unmarshal(data, &parser)
+
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+		if parser.Fmsg != nil {
+			if parser.Fmsg.Name != constName {
+				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Fmsg.Name)
+			}
+		}
+	}
+}
+
 func BenchmarkAnyLargeInnerWAllocation(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		aInner := AnotherInnerStruct.AnotherInnerMessage{
@@ -278,6 +384,42 @@ func BenchmarkByteLargeInnerWAllocation(b *testing.B) {
 		}
 		if structName != constName {
 			b.Fatalf("Error: expcted name %s, but got %s", constName, structName)
+		}
+	}
+}
+
+func BenchmarkGeneralLargeInnerWAllocation(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		aInner := secondmessage.SecondMessage{
+			Name:       "randomName",
+			Id:         int32(100),
+			SecondName: "secondRandomName",
+			ThirdName:  "thirdRandomName",
+			IdFloat:    float32(100.02),
+			FourthName: "fourthRandomName",
+			FifthName:  "fifthRandomName",
+		}
+		generalStruct := general.General{
+			Smsg: &aInner,
+		}
+		data, err := proto.Marshal(&generalStruct)
+		if err != nil {
+			log.Fatal("marshaling error: ", err)
+		}
+		parser := general.General{}
+		err = proto.Unmarshal(data, &parser)
+
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+		if parser.Fmsg != nil {
+			if parser.Fmsg.Name != constName {
+				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Fmsg.Name)
+			}
 		}
 	}
 }
