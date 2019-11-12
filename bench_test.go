@@ -1,6 +1,11 @@
 package main
 
-import "testing"
+import (
+	"testing"
+	// anotherinner "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/anotherinner"
+	// inner "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/inner"
+	// anotherinner "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/anotherinner"
+)
 
 var sasds []string
 
