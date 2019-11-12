@@ -102,13 +102,30 @@ func BenchmarkGeneralSmallInnerWoAllocation(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		parser := general.General{}
 		err = proto.Unmarshal(data, &parser)
-
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
 		}
-
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
+		if parser.Msg10 != nil {
+		}
+		if parser.Msg9 != nil {
+		}
+		if parser.Msg8 != nil {
+		}
+		if parser.Msg7 != nil {
+		}
+		if parser.Msg6 != nil {
+		}
+		if parser.Msg5 != nil {
+		}
+		if parser.Msg4 != nil {
+		}
+		if parser.Msg3 != nil {
+		}
+		if parser.Msg2 != nil {
+		}
+		if parser.Msg1 != nil {
+		}
+		if parser.Smsg != nil {
 		}
 		if parser.Fmsg != nil {
 			if parser.Fmsg.Name != constName {
@@ -200,9 +217,27 @@ func BenchmarkGeneralSmallInnerWAllocation(b *testing.B) {
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
 		}
-
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
+		if parser.Msg10 != nil {
+		}
+		if parser.Msg9 != nil {
+		}
+		if parser.Msg8 != nil {
+		}
+		if parser.Msg7 != nil {
+		}
+		if parser.Msg6 != nil {
+		}
+		if parser.Msg5 != nil {
+		}
+		if parser.Msg4 != nil {
+		}
+		if parser.Msg3 != nil {
+		}
+		if parser.Msg2 != nil {
+		}
+		if parser.Msg1 != nil {
+		}
+		if parser.Smsg != nil {
 		}
 		if parser.Fmsg != nil {
 			if parser.Fmsg.Name != constName {
@@ -284,7 +319,7 @@ func BenchmarkByteLargeInnerWoAllocation(b *testing.B) {
 
 func BenchmarkGeneralLargeInnerWoAllocation(b *testing.B) {
 	aInner := secondmessage.SecondMessage{
-		Name:       "randomName",
+		Name:       constName,
 		Id:         int32(100),
 		SecondName: "secondRandomName",
 		ThirdName:  "thirdRandomName",
@@ -306,13 +341,31 @@ func BenchmarkGeneralLargeInnerWoAllocation(b *testing.B) {
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
 		}
-
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
+		if parser.Msg10 != nil {
+		}
+		if parser.Msg9 != nil {
+		}
+		if parser.Msg8 != nil {
+		}
+		if parser.Msg7 != nil {
+		}
+		if parser.Msg6 != nil {
+		}
+		if parser.Msg5 != nil {
+		}
+		if parser.Msg4 != nil {
+		}
+		if parser.Msg3 != nil {
+		}
+		if parser.Msg2 != nil {
+		}
+		if parser.Msg1 != nil {
 		}
 		if parser.Fmsg != nil {
-			if parser.Fmsg.Name != constName {
-				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Fmsg.Name)
+		}
+		if parser.Smsg != nil {
+			if parser.Smsg.Name != constName {
+				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Smsg.Name)
 			}
 		}
 	}
@@ -391,7 +444,7 @@ func BenchmarkByteLargeInnerWAllocation(b *testing.B) {
 func BenchmarkGeneralLargeInnerWAllocation(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		aInner := secondmessage.SecondMessage{
-			Name:       "randomName",
+			Name:       constName,
 			Id:         int32(100),
 			SecondName: "secondRandomName",
 			ThirdName:  "thirdRandomName",
@@ -412,13 +465,31 @@ func BenchmarkGeneralLargeInnerWAllocation(b *testing.B) {
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
 		}
-
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
+		if parser.Msg10 != nil {
+		}
+		if parser.Msg9 != nil {
+		}
+		if parser.Msg8 != nil {
+		}
+		if parser.Msg7 != nil {
+		}
+		if parser.Msg6 != nil {
+		}
+		if parser.Msg5 != nil {
+		}
+		if parser.Msg4 != nil {
+		}
+		if parser.Msg3 != nil {
+		}
+		if parser.Msg2 != nil {
+		}
+		if parser.Msg1 != nil {
 		}
 		if parser.Fmsg != nil {
-			if parser.Fmsg.Name != constName {
-				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Fmsg.Name)
+		}
+		if parser.Smsg != nil {
+			if parser.Smsg.Name != constName {
+				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Smsg.Name)
 			}
 		}
 	}
