@@ -13,15 +13,19 @@ func init() {
 }
 
 func BenchmarkAny(b *testing.B) {
-	name := "AnyRandomStructure"
-	if name != constName {
-		b.Fatalf("Error: expcted name %s, but got %s", constName, name)
+	for i := 0; i < b.N; i++ {
+		name := "AnyRandomStructure"
+		if name != constName {
+			b.Fatalf("Error: expcted name %s, but got %s", constName, name)
+		}
 	}
 }
 
 func BenchmarkByte(b *testing.B) {
-	name := "AnyRandomStructure"
-	if name != constName {
-		b.Fatalf("Error: expcted name %s, but got %s", constName, name)
+	for i := 0; i < b.N; i++ {
+		name := "AnyRandomStructure"
+		if name != constName {
+			b.Fatalf("Error: expcted name %s, but got %s", constName, name)
+		}
 	}
 }
