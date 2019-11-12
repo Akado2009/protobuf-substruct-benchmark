@@ -10,4 +10,14 @@ import "secondmessage/secondmessage.proto";
 message General {
   firstmessage.FirstMessage fmsg = 1;
   secondmessage.SecondMessage smsg = 2;
+  secondmessage.SecondMessage msg1 = 3;
+  secondmessage.SecondMessage msg2 = 4;
+  secondmessage.SecondMessage msg3 = 5;
+  secondmessage.SecondMessage msg4 = 6;
+  secondmessage.SecondMessage msg5 = 7;
+  secondmessage.SecondMessage msg6 = 8;
+  secondmessage.SecondMessage msg7 = 9;
+  secondmessage.SecondMessage msg8 = 10;
+  secondmessage.SecondMessage msg9 = 11;
+  secondmessage.SecondMessage msg10 = 12;
 }
