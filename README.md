@@ -3,5 +3,5 @@
 To run
 
 ```
-go test -benchmem -bench=. bench_test.go
+go test -cpuprofile cpu.prof -memprofile mem.prof -benchmem -bench=. bench_test.go
 ```
