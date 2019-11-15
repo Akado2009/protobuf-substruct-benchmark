@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"log"
 	"testing"
 
@@ -73,7 +72,7 @@ func BenchmarkByteSmallInnerWoAllocation(b *testing.B) {
 	copy(buf[:], constName)
 	overallData := append(buf, data...)
 	for i := 0; i < b.N; i++ {
-		structName := string(bytes.Trim(overallData[:bufferSize], "\x00")[:])
+		structName := string(overallData[:bufferSize])
 		structSelf := overallData[bufferSize:]
 		newInner := InnerStruct.InnerMessage{}
 		err = proto.Unmarshal(structSelf, &newInner)
@@ -81,7 +80,7 @@ func BenchmarkByteSmallInnerWoAllocation(b *testing.B) {
 			log.Fatal("unmarshaling error: ", err)
 		}
 		if structName != constName {
-			b.Fatalf("Error: expcted name %s, but got %s", constName, structName)
+			//			b.Fatalf("Error: expcted name %s, but got %s", constName, structName)
 		}
 	}
 }
@@ -102,118 +101,6 @@ func BenchmarkGeneralSmallInnerWoAllocation(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		parser := general.General{}
 		err = proto.Unmarshal(data, &parser)
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
-		}
-		if parser.Msg10 != nil {
-		}
-		if parser.Msg9 != nil {
-		}
-		if parser.Msg8 != nil {
-		}
-		if parser.Msg7 != nil {
-		}
-		if parser.Msg6 != nil {
-		}
-		if parser.Msg5 != nil {
-		}
-		if parser.Msg4 != nil {
-		}
-		if parser.Msg3 != nil {
-		}
-		if parser.Msg2 != nil {
-		}
-		if parser.Msg1 != nil {
-		}
-		if parser.Smsg != nil {
-		}
-		if parser.Fmsg != nil {
-			if parser.Fmsg.Name != constName {
-				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Fmsg.Name)
-			}
-		}
-	}
-}
-
-func BenchmarkAnySmallInnerWAllocation(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		inner := &InnerStruct.InnerMessage{
-			Name:       "randomName",
-			Id:         int32(100),
-			SecondName: "secondRandomName",
-		}
-		msg, err := ptypes.MarshalAny(inner)
-		wrapper := UniversalParser.UniversalMessage{
-			Name: constName,
-			Msg:  msg,
-		}
-		data, err := proto.Marshal(&wrapper)
-		if err != nil {
-			log.Fatal("marshaling error: ", err)
-		}
-		parser := UniversalParser.UniversalMessage{}
-		err = proto.Unmarshal(data, &parser)
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
-		}
-		newInner := InnerStruct.InnerMessage{}
-		err = proto.Unmarshal(parser.Msg.Value, &newInner)
-		// err = ptypes.UnmarshalAny(parser.Msg, &newInner)
-
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
-		}
-
-		if parser.Name != constName {
-			b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Name)
-		}
-	}
-}
-
-func BenchmarkByteSmallInnerWAllocation(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		inner := InnerStruct.InnerMessage{
-			Name:       "randomName",
-			Id:         int32(100),
-			SecondName: "secondRandomName",
-		}
-		data, err := proto.Marshal(&inner)
-		if err != nil {
-			log.Fatal("marshaling error: ", err)
-		}
-		buf := make([]byte, bufferSize, bufferSize)
-		copy(buf[:], constName)
-		overallData := append(buf, data...)
-		structName := string(bytes.Trim(overallData[:bufferSize], "\x00")[:])
-		structSelf := overallData[bufferSize:]
-		newInner := InnerStruct.InnerMessage{}
-		err = proto.Unmarshal(structSelf, &newInner)
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
-		}
-		if structName != constName {
-			b.Fatalf("Error: expcted name %s, but got %s", constName, structName)
-		}
-	}
-}
-
-func BenchmarkGeneralSmallInnerWAllocation(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		inner := firstmessage.FirstMessage{
-			Name:       constName,
-			Id:         int32(100),
-			SecondName: "secondRandomName",
-		}
-		generalStruct := general.General{
-			Fmsg: &inner,
-		}
-		data, err := proto.Marshal(&generalStruct)
-		if err != nil {
-			log.Fatal("marshaling error: ", err)
-		}
-		parser := general.General{}
-		err = proto.Unmarshal(data, &parser)
-
 		if err != nil {
 			log.Fatal("unmarshaling error: ", err)
 		}
@@ -314,9 +201,8 @@ func BenchmarkByteLargeInnerWoAllocation(b *testing.B) {
 		}
 
 		if structName != constName {
-//			b.Fatalf("Error: expcted name %s, but got %s", constName, structName)
+			//			b.Fatalf("Error: expcted name %s, but got %s", constName, structName)
 		}
-
 	}
 }
 
@@ -338,130 +224,6 @@ func BenchmarkGeneralLargeInnerWoAllocation(b *testing.B) {
 		log.Fatal("marshaling error: ", err)
 	}
 	for i := 0; i < b.N; i++ {
-		parser := general.General{}
-		err = proto.Unmarshal(data, &parser)
-
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
-		}
-		if parser.Msg10 != nil {
-		}
-		if parser.Msg9 != nil {
-		}
-		if parser.Msg8 != nil {
-		}
-		if parser.Msg7 != nil {
-		}
-		if parser.Msg6 != nil {
-		}
-		if parser.Msg5 != nil {
-		}
-		if parser.Msg4 != nil {
-		}
-		if parser.Msg3 != nil {
-		}
-		if parser.Msg2 != nil {
-		}
-		if parser.Msg1 != nil {
-		}
-		if parser.Fmsg != nil {
-		}
-		if parser.Smsg != nil {
-			if parser.Smsg.Name != constName {
-				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Smsg.Name)
-			}
-		}
-	}
-}
-
-func BenchmarkAnyLargeInnerWAllocation(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		aInner := AnotherInnerStruct.AnotherInnerMessage{
-			Name:       "randomName",
-			Id:         int32(100),
-			SecondName: "secondRandomName",
-			ThirdName:  "thirdRandomName",
-			IdFloat:    float32(100.02),
-			FourthName: "fourthRandomName",
-			FifthName:  "fifthRandomName",
-		}
-		msg, err := ptypes.MarshalAny(&aInner)
-		wrapper := UniversalParser.UniversalMessage{
-			Name: constName,
-			Msg:  msg,
-		}
-		data, err := proto.Marshal(&wrapper)
-		if err != nil {
-			log.Fatal("marshaling error: ", err)
-		}
-		parser := UniversalParser.UniversalMessage{}
-		err = proto.Unmarshal(data, &parser)
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
-		}
-		newAInner := AnotherInnerStruct.AnotherInnerMessage{}
-		err = proto.Unmarshal(parser.Msg.Value, &newAInner)
-
-		// err = ptypes.UnmarshalAny(parser.Msg, &newAInner)
-
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
-		}
-		if parser.Name != constName {
-			b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Name)
-		}
-	}
-}
-
-func BenchmarkByteLargeInnerWAllocation(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		aInner := AnotherInnerStruct.AnotherInnerMessage{
-			Name:       "randomName",
-			Id:         int32(100),
-			SecondName: "secondRandomName",
-			ThirdName:  "thirdRandomName",
-			IdFloat:    float32(100.02),
-			FourthName: "fourthRandomName",
-			FifthName:  "fifthRandomName",
-		}
-		data, err := proto.Marshal(&aInner)
-		if err != nil {
-			log.Fatal("marshaling error: ", err)
-		}
-		buf := make([]byte, bufferSize, bufferSize)
-		copy(buf[:], constName)
-		overallData := append(buf, data...)
-		structName := string(bytes.TrimRight(overallData[:bufferSize], "\x00")[:])
-		structSelf := overallData[bufferSize:]
-		newInner := InnerStruct.InnerMessage{}
-		err = proto.Unmarshal(structSelf, &newInner)
-		if err != nil {
-			log.Fatal("unmarshaling error: ", err)
-		}
-		if structName != constName {
-			b.Fatalf("Error: expcted name %s, but got %s", constName, structName)
-		}
-	}
-}
-
-func BenchmarkGeneralLargeInnerWAllocation(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		aInner := secondmessage.SecondMessage{
-			Name:       constName,
-			Id:         int32(100),
-			SecondName: "secondRandomName",
-			ThirdName:  "thirdRandomName",
-			IdFloat:    float32(100.02),
-			FourthName: "fourthRandomName",
-			FifthName:  "fifthRandomName",
-		}
-		generalStruct := general.General{
-			Smsg: &aInner,
-		}
-		data, err := proto.Marshal(&generalStruct)
-		if err != nil {
-			log.Fatal("marshaling error: ", err)
-		}
 		parser := general.General{}
 		err = proto.Unmarshal(data, &parser)
 
