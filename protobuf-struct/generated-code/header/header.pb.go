@@ -3,9 +3,13 @@
 
 package HeaderStruct
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import (
+	fmt "fmt"
+
+	proto "github.com/golang/protobuf/proto"
+
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -19,7 +23,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type HeaderMessager struct {
-	Type                 tring    `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Type                 string   `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 	Message              []byte   `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -55,7 +59,7 @@ func NewHeaderMessager() *HeaderMessager {
 	return m
 }
 
-func (m *HeaderMessager) GetType() tring {
+func (m *HeaderMessager) GetType() string {
 	return m.Type
 }
 
@@ -63,7 +67,7 @@ func (m *HeaderMessager) GetMessage() []byte {
 	return m.Message
 }
 
-func (m *HeaderMessager) SetType(value tring) *HeaderMessager {
+func (m *HeaderMessager) SetType(value string) *HeaderMessager {
 	m.Type = value
 	return m
 }
