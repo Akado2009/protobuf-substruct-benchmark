@@ -12,6 +12,7 @@ import (
 	general "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/general"
 
 	secondmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/secondmessage"
+	// HeaderStruct "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/header"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
@@ -131,6 +132,22 @@ func BenchmarkGeneralSmallInnerWoAllocation(b *testing.B) {
 				b.Fatalf("Error: expcted name %s, but got %s", constName, parser.Fmsg.Name)
 			}
 		}
+	}
+}
+
+func BenchmarkGeneralSmallInnerWoAllocation(b *testing.B) {
+	inner := firstmessage.FirstMessage{
+		Name:       constName,
+		Id:         int32(100),
+		SecondName: "secondRandomName",
+	}
+	data, err := proto.Marshal(&inner)
+	if err != nil {
+		log.Fatal("marshaling error: ", err)
+	}
+
+	for i := 0; i < b.N; i++ {
+
 	}
 }
 
