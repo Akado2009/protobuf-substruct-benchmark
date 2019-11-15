@@ -10,6 +10,7 @@ import (
 
 	firstmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/firstmessage"
 	general "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/general"
+	generaloneof "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/generaloneof"
 
 	HeaderStruct "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/generated-code/header"
 	secondmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/secondmessage"
@@ -169,6 +170,63 @@ func BenchmarkHeaderSmallInnerWoAllocation(b *testing.B) {
 		if headerParser.Type != constName {
 			b.Fatalf("Error: expcted name %s, but got %s", constName, headerParser.Type)
 		}
+	}
+}
+
+func BenchmarkOneOfSmallInnerWoAllocation(b *testing.B) {
+	inner := firstmessage.FirstMessage{
+		Name:       constName,
+		Id:         int32(100),
+		SecondName: "secondRandomName",
+	}
+
+	hS := generaloneof.GeneralOneOf{
+		Msg: &generaloneof.GeneralOneOf_Fmsg{
+			Fmsg: &inner,
+		},
+	}
+
+	headerData, err := proto.Marshal(&hS)
+	if err != nil {
+		log.Fatal("marshaling error: ", err)
+	}
+	for i := 0; i < b.N; i++ {
+		headerParser := generaloneof.GeneralOneOf{}
+		err = proto.Unmarshal(headerData, &headerParser)
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+
+		// _ := secondmessage.SecondMessage{}
+		switch x := headerParser.Msg.(type) {
+		case *generaloneof.GeneralOneOf_Msg1:
+			continue
+		case *generaloneof.GeneralOneOf_Msg2:
+			continue
+		case *generaloneof.GeneralOneOf_Msg3:
+			continue
+		case *generaloneof.GeneralOneOf_Msg4:
+			continue
+		case *generaloneof.GeneralOneOf_Msg5:
+			continue
+		case *generaloneof.GeneralOneOf_Msg6:
+			continue
+		case *generaloneof.GeneralOneOf_Msg7:
+			continue
+		case *generaloneof.GeneralOneOf_Msg8:
+			continue
+		case *generaloneof.GeneralOneOf_Msg9:
+			continue
+		case *generaloneof.GeneralOneOf_Msg10:
+			continue
+		case *generaloneof.GeneralOneOf_Fmsg:
+			if x.Fmsg.Name != constName {
+				b.Fatalf("Error: expcted name %s, but got %s", constName, x.Fmsg.Name)
+			}
+		case *generaloneof.GeneralOneOf_Smsg:
+			continue
+		}
+
 	}
 }
 
@@ -336,5 +394,67 @@ func BenchmarkHeaderLargeInnerWoAllocation(b *testing.B) {
 		if headerParser.Type != constName {
 			b.Fatalf("Error: expcted name %s, but got %s", constName, headerParser.Type)
 		}
+	}
+}
+
+func BenchmarkOneOfLargeInnerWoAllocation(b *testing.B) {
+	aInner := &secondmessage.SecondMessage{
+		Name:       constName,
+		Id:         int32(100),
+		SecondName: "secondRandomName",
+		ThirdName:  "thirdRandomName",
+		IdFloat:    float32(100.02),
+		FourthName: "fourthRandomName",
+		FifthName:  "fifthRandomName",
+	}
+
+	hS := generaloneof.GeneralOneOf{
+		Msg: &generaloneof.GeneralOneOf_Smsg{
+			Smsg: aInner,
+		},
+	}
+
+	headerData, err := proto.Marshal(&hS)
+	if err != nil {
+		log.Fatal("marshaling error: ", err)
+	}
+	for i := 0; i < b.N; i++ {
+		headerParser := generaloneof.GeneralOneOf{}
+		err = proto.Unmarshal(headerData, &headerParser)
+		if err != nil {
+			log.Fatal("unmarshaling error: ", err)
+		}
+
+		// _ := secondmessage.SecondMessage{}
+		switch x := headerParser.Msg.(type) {
+		case *generaloneof.GeneralOneOf_Msg1:
+			continue
+		case *generaloneof.GeneralOneOf_Msg2:
+			continue
+		case *generaloneof.GeneralOneOf_Msg3:
+			continue
+		case *generaloneof.GeneralOneOf_Msg4:
+			continue
+		case *generaloneof.GeneralOneOf_Msg5:
+			continue
+		case *generaloneof.GeneralOneOf_Msg6:
+			continue
+		case *generaloneof.GeneralOneOf_Msg7:
+			continue
+		case *generaloneof.GeneralOneOf_Msg8:
+			continue
+		case *generaloneof.GeneralOneOf_Msg9:
+			continue
+		case *generaloneof.GeneralOneOf_Msg10:
+			continue
+		case *generaloneof.GeneralOneOf_Fmsg:
+			continue
+		case *generaloneof.GeneralOneOf_Smsg:
+			if x.Smsg.Name != constName {
+				b.Fatalf("Error: expcted name %s, but got %s", constName, x.Smsg.Name)
+			}
+
+		}
+
 	}
 }
