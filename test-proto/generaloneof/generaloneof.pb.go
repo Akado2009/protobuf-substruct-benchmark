@@ -3,11 +3,17 @@
 
 package generaloneof // import "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/generaloneof"
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import firstmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/firstmessage"
-import secondmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/secondmessage"
+import (
+	fmt "fmt"
+
+	proto "github.com/golang/protobuf/proto"
+
+	math "math"
+
+	firstmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/firstmessage"
+
+	secondmessage "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/secondmessage"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -145,7 +151,7 @@ func (*GeneralOneOf_Msg9) isGeneralOneOf_Msg() {}
 
 func (*GeneralOneOf_Msg10) isGeneralOneOf_Msg() {}
 
-func (m *GeneralOneOf) GetMsg() sGeneralOneOf_Msg {
+func (m *GeneralOneOf) GetMsg() isGeneralOneOf_Msg {
 	return m.Msg
 }
 
