@@ -9,5 +9,5 @@ import "secondmessage/secondmessage.proto";
 
 message GeneralOptArrays {
     repeated firstmessage.FirstMessage fmsgs = 1;
-    repeated secondmessage.SecondMessage smsg = 2;
+    repeated secondmessage.SecondMessage smsgs = 2;
 }
