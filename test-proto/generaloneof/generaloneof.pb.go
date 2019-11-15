@@ -21,7 +21,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type GeneralOneOf struct {
-	// Types that are valid to be assigned to MSg:
+	// Types that are valid to be assigned to Msg:
 	//	*GeneralOneOf_Fmsg
 	//	*GeneralOneOf_Smsg
 	//	*GeneralOneOf_Msg1
@@ -34,7 +34,7 @@ type GeneralOneOf struct {
 	//	*GeneralOneOf_Msg8
 	//	*GeneralOneOf_Msg9
 	//	*GeneralOneOf_Msg10
-	MSg                  isGeneralOneOf_MSg `protobuf_oneof:"MSg"`
+	Msg                  isGeneralOneOf_Msg `protobuf_oneof:"Msg"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
 	XXX_unrecognized     []byte             `json:"-"`
 	XXX_sizecache        int32              `json:"-"`
@@ -44,7 +44,7 @@ func (m *GeneralOneOf) Reset()         { *m = GeneralOneOf{} }
 func (m *GeneralOneOf) String() string { return proto.CompactTextString(m) }
 func (*GeneralOneOf) ProtoMessage()    {}
 func (*GeneralOneOf) Descriptor() ([]byte, []int) {
-	return fileDescriptor_generaloneof_bcff6545371ae650, []int{0}
+	return fileDescriptor_generaloneof_d1d9cddb17b71582, []int{0}
 }
 func (m *GeneralOneOf) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GeneralOneOf.Unmarshal(m, b)
@@ -69,8 +69,8 @@ func NewGeneralOneOf() *GeneralOneOf {
 	return m
 }
 
-type isGeneralOneOf_MSg interface {
-	isGeneralOneOf_MSg()
+type isGeneralOneOf_Msg interface {
+	isGeneralOneOf_Msg()
 }
 
 type GeneralOneOf_Fmsg struct {
@@ -121,113 +121,113 @@ type GeneralOneOf_Msg10 struct {
 	Msg10 *secondmessage.SecondMessage `protobuf:"bytes,12,opt,name=msg10,proto3,oneof"`
 }
 
-func (*GeneralOneOf_Fmsg) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Fmsg) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Smsg) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Smsg) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg1) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg1) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg2) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg2) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg3) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg3) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg4) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg4) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg5) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg5) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg6) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg6) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg7) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg7) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg8) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg8) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg9) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg9) isGeneralOneOf_Msg() {}
 
-func (*GeneralOneOf_Msg10) isGeneralOneOf_MSg() {}
+func (*GeneralOneOf_Msg10) isGeneralOneOf_Msg() {}
 
-func (m *GeneralOneOf) GetMSg() sGeneralOneOf_MSg {
-	return m.MSg
+func (m *GeneralOneOf) GetMsg() sGeneralOneOf_Msg {
+	return m.Msg
 }
 
 func (m *GeneralOneOf) GetFmsg() *firstmessage.FirstMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Fmsg); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Fmsg); ok {
 		return x.Fmsg
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetSmsg() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Smsg); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Smsg); ok {
 		return x.Smsg
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg1() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg1); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg1); ok {
 		return x.Msg1
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg2() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg2); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg2); ok {
 		return x.Msg2
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg3() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg3); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg3); ok {
 		return x.Msg3
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg4() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg4); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg4); ok {
 		return x.Msg4
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg5() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg5); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg5); ok {
 		return x.Msg5
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg6() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg6); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg6); ok {
 		return x.Msg6
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg7() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg7); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg7); ok {
 		return x.Msg7
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg8() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg8); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg8); ok {
 		return x.Msg8
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg9() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg9); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg9); ok {
 		return x.Msg9
 	}
 	return nil
 }
 
 func (m *GeneralOneOf) GetMsg10() *secondmessage.SecondMessage {
-	if x, ok := m.GetMSg().(*GeneralOneOf_Msg10); ok {
+	if x, ok := m.GetMsg().(*GeneralOneOf_Msg10); ok {
 		return x.Msg10
 	}
 	return nil
@@ -253,8 +253,8 @@ func (*GeneralOneOf) XXX_OneofFuncs() (func(msg proto.Message, b *proto.Buffer) 
 
 func _GeneralOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 	m := msg.(*GeneralOneOf)
-	// MSg
-	switch x := m.MSg.(type) {
+	// Msg
+	switch x := m.Msg.(type) {
 	case *GeneralOneOf_Fmsg:
 		b.EncodeVarint(1<<3 | proto.WireBytes)
 		if err := b.EncodeMessage(x.Fmsg); err != nil {
@@ -317,7 +317,7 @@ func _GeneralOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 		}
 	case nil:
 	default:
-		return fmt.Errorf("GeneralOneOf.MSg has unexpected type %T", x)
+		return fmt.Errorf("GeneralOneOf.Msg has unexpected type %T", x)
 	}
 	return nil
 }
@@ -325,101 +325,101 @@ func _GeneralOneOf_OneofMarshaler(msg proto.Message, b *proto.Buffer) error {
 func _GeneralOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.Buffer) (bool, error) {
 	m := msg.(*GeneralOneOf)
 	switch tag {
-	case 1: // MSg.fmsg
+	case 1: // Msg.fmsg
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(firstmessage.FirstMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Fmsg{msg}
+		m.Msg = &GeneralOneOf_Fmsg{msg}
 		return true, err
-	case 2: // MSg.smsg
+	case 2: // Msg.smsg
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Smsg{msg}
+		m.Msg = &GeneralOneOf_Smsg{msg}
 		return true, err
-	case 3: // MSg.msg1
+	case 3: // Msg.msg1
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg1{msg}
+		m.Msg = &GeneralOneOf_Msg1{msg}
 		return true, err
-	case 4: // MSg.msg2
+	case 4: // Msg.msg2
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg2{msg}
+		m.Msg = &GeneralOneOf_Msg2{msg}
 		return true, err
-	case 5: // MSg.msg3
+	case 5: // Msg.msg3
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg3{msg}
+		m.Msg = &GeneralOneOf_Msg3{msg}
 		return true, err
-	case 6: // MSg.msg4
+	case 6: // Msg.msg4
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg4{msg}
+		m.Msg = &GeneralOneOf_Msg4{msg}
 		return true, err
-	case 7: // MSg.msg5
+	case 7: // Msg.msg5
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg5{msg}
+		m.Msg = &GeneralOneOf_Msg5{msg}
 		return true, err
-	case 8: // MSg.msg6
+	case 8: // Msg.msg6
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg6{msg}
+		m.Msg = &GeneralOneOf_Msg6{msg}
 		return true, err
-	case 9: // MSg.msg7
+	case 9: // Msg.msg7
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg7{msg}
+		m.Msg = &GeneralOneOf_Msg7{msg}
 		return true, err
-	case 10: // MSg.msg8
+	case 10: // Msg.msg8
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg8{msg}
+		m.Msg = &GeneralOneOf_Msg8{msg}
 		return true, err
-	case 11: // MSg.msg9
+	case 11: // Msg.msg9
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg9{msg}
+		m.Msg = &GeneralOneOf_Msg9{msg}
 		return true, err
-	case 12: // MSg.msg10
+	case 12: // Msg.msg10
 		if wire != proto.WireBytes {
 			return true, proto.ErrInternalBadWireType
 		}
 		msg := new(secondmessage.SecondMessage)
 		err := b.DecodeMessage(msg)
-		m.MSg = &GeneralOneOf_Msg10{msg}
+		m.Msg = &GeneralOneOf_Msg10{msg}
 		return true, err
 	default:
 		return false, nil
@@ -428,8 +428,8 @@ func _GeneralOneOf_OneofUnmarshaler(msg proto.Message, tag, wire int, b *proto.B
 
 func _GeneralOneOf_OneofSizer(msg proto.Message) (n int) {
 	m := msg.(*GeneralOneOf)
-	// MSg
-	switch x := m.MSg.(type) {
+	// Msg
+	switch x := m.Msg.(type) {
 	case *GeneralOneOf_Fmsg:
 		s := proto.Size(x.Fmsg)
 		n += 1 // tag and wire
@@ -502,28 +502,28 @@ func init() {
 }
 
 func init() {
-	proto.RegisterFile("generaloneof/generaloneof.proto", fileDescriptor_generaloneof_bcff6545371ae650)
+	proto.RegisterFile("generaloneof/generaloneof.proto", fileDescriptor_generaloneof_d1d9cddb17b71582)
 }
 
-var fileDescriptor_generaloneof_bcff6545371ae650 = []byte{
-	// 297 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0xd3, 0x3b, 0x6f, 0xb3, 0x30,
-	0x14, 0x06, 0xe0, 0x2f, 0x5f, 0x20, 0x69, 0x9d, 0x4c, 0x4c, 0x47, 0xa8, 0x52, 0xda, 0x4e, 0x5d,
-	0xb8, 0x14, 0xc8, 0x85, 0xb1, 0x19, 0x7a, 0x51, 0x15, 0x45, 0x6a, 0xb6, 0x6e, 0x40, 0x8c, 0x13,
-	0xa5, 0xe0, 0x8a, 0x63, 0x7e, 0x42, 0xff, 0x77, 0x85, 0xed, 0x4a, 0xb0, 0x79, 0x7c, 0x8f, 0xde,
-	0xe7, 0x78, 0xb0, 0x4d, 0x16, 0x8c, 0xd6, 0xb4, 0xc9, 0xbe, 0x78, 0x4d, 0x79, 0x19, 0xf4, 0x83,
-	0xff, 0xdd, 0x70, 0xc1, 0x9d, 0xa9, 0x9e, 0xb9, 0x8b, 0xf2, 0xdc, 0xa0, 0xa8, 0x28, 0x62, 0xc6,
-	0x68, 0xd0, 0x0f, 0xaa, 0xe9, 0xde, 0x21, 0x2d, 0x78, 0x7d, 0xfc, 0x6b, 0x0c, 0x92, 0xaa, 0xdc,
-	0xff, 0xd8, 0x64, 0xfe, 0xa2, 0xf6, 0xed, 0x6b, 0xba, 0x2f, 0x9d, 0x90, 0x58, 0x65, 0x85, 0x0c,
-	0x46, 0xb7, 0xa3, 0x87, 0x59, 0xe4, 0xfa, 0x83, 0xb5, 0xcf, 0x5d, 0xd8, 0xa9, 0xf0, 0xfa, 0xef,
-	0x43, 0x36, 0x9d, 0x88, 0x58, 0xd8, 0x89, 0xff, 0x52, 0xdc, 0xf8, 0xc3, 0x63, 0x0e, 0x32, 0xf5,
-	0x0c, 0x6a, 0x53, 0x21, 0x7b, 0x84, 0xb1, 0x99, 0xe9, 0xba, 0xda, 0x44, 0x60, 0x19, 0x9b, 0x48,
-	0x9b, 0x18, 0x6c, 0x63, 0x13, 0x6b, 0x93, 0xc0, 0xc4, 0xd8, 0x24, 0xda, 0x2c, 0x61, 0x6a, 0x6c,
-	0x96, 0xda, 0xac, 0xe0, 0xca, 0xd8, 0xac, 0xb4, 0x59, 0xc3, 0xb5, 0xb1, 0x59, 0x6b, 0xb3, 0x01,
-	0x62, 0x6c, 0x36, 0xda, 0xa4, 0x30, 0x33, 0x36, 0xa9, 0x93, 0x10, 0xbb, 0xbb, 0xa7, 0x10, 0xe6,
-	0x46, 0x48, 0x95, 0xb7, 0x36, 0x19, 0xef, 0x0e, 0x6c, 0xfb, 0xfe, 0xf9, 0xc6, 0xce, 0xe2, 0xd4,
-	0xe6, 0x7e, 0xc1, 0xab, 0xe0, 0xe9, 0x92, 0x1d, 0x79, 0x14, 0x86, 0x69, 0x20, 0x5f, 0x69, 0xde,
-	0x96, 0x1e, 0xb6, 0x39, 0x8a, 0xa6, 0x2d, 0x84, 0x97, 0xd3, 0xba, 0x38, 0x55, 0x59, 0x73, 0x09,
-	0x04, 0x45, 0xe1, 0xc9, 0xc6, 0xe0, 0x9f, 0xe4, 0x13, 0x39, 0x8b, 0x7f, 0x03, 0x00, 0x00, 0xff,
-	0xff, 0x73, 0x40, 0xc5, 0xa8, 0x4b, 0x03, 0x00, 0x00,
+var fileDescriptor_generaloneof_d1d9cddb17b71582 = []byte{
+	// 295 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0xd3, 0xbb, 0x4e, 0xc3, 0x30,
+	0x14, 0x06, 0x60, 0x4a, 0x93, 0x16, 0xdc, 0x4e, 0x99, 0x8e, 0x22, 0xa4, 0x02, 0x13, 0x4b, 0x2e,
+	0x24, 0xe9, 0x25, 0x23, 0x1d, 0xb8, 0x08, 0x55, 0x95, 0x60, 0x63, 0x4b, 0x52, 0xc7, 0xad, 0x4a,
+	0x62, 0x94, 0xe3, 0x3c, 0x02, 0xef, 0x8d, 0x62, 0x1b, 0x29, 0xd9, 0x3c, 0xfe, 0x47, 0xff, 0x77,
+	0x3c, 0xd8, 0x26, 0x0b, 0x46, 0x6b, 0xda, 0x64, 0xdf, 0xbc, 0xa6, 0xbc, 0x0c, 0xfa, 0xc1, 0xff,
+	0x69, 0xb8, 0xe0, 0xce, 0x54, 0xcf, 0xdc, 0x45, 0x79, 0x6a, 0x50, 0x54, 0x14, 0x31, 0x63, 0x34,
+	0xe8, 0x07, 0xd5, 0x74, 0xef, 0x90, 0x16, 0xbc, 0x3e, 0xfc, 0x37, 0x06, 0x49, 0x55, 0xee, 0x7f,
+	0x6d, 0x32, 0x7f, 0x51, 0xfb, 0xf6, 0x35, 0xdd, 0x97, 0x4e, 0x48, 0xac, 0xb2, 0x42, 0x06, 0xa3,
+	0xdb, 0xd1, 0xc3, 0x2c, 0x72, 0xfd, 0xc1, 0xda, 0xe7, 0x2e, 0xec, 0x54, 0x78, 0xbd, 0xf8, 0x90,
+	0x4d, 0x27, 0x22, 0x16, 0x76, 0xe2, 0x52, 0x8a, 0x1b, 0x7f, 0x78, 0xcc, 0xa7, 0x4c, 0x3d, 0x83,
+	0xda, 0x54, 0xc8, 0x1e, 0x61, 0x6c, 0x66, 0xba, 0xae, 0x36, 0x11, 0x58, 0xc6, 0x26, 0xd2, 0x26,
+	0x06, 0xdb, 0xd8, 0xc4, 0xda, 0x24, 0x30, 0x31, 0x36, 0x89, 0x36, 0x4b, 0x98, 0x1a, 0x9b, 0xa5,
+	0x36, 0x2b, 0xb8, 0x32, 0x36, 0x2b, 0x6d, 0xd6, 0x70, 0x6d, 0x6c, 0xd6, 0xda, 0x6c, 0x80, 0x18,
+	0x9b, 0x8d, 0x36, 0x29, 0xcc, 0x8c, 0x4d, 0xea, 0x24, 0xc4, 0xee, 0xee, 0x29, 0x84, 0xb9, 0x11,
+	0x52, 0xe5, 0xad, 0x4d, 0xc6, 0x3b, 0x64, 0xdb, 0xf7, 0xaf, 0x37, 0x76, 0x12, 0xc7, 0x36, 0xf7,
+	0x0b, 0x5e, 0x05, 0x4f, 0xe7, 0xec, 0xc0, 0xa3, 0x30, 0x4c, 0x03, 0xf9, 0x4a, 0xf3, 0xb6, 0xf4,
+	0xb0, 0xcd, 0x51, 0x34, 0x6d, 0x21, 0xbc, 0x9c, 0xd6, 0xc5, 0xb1, 0xca, 0x9a, 0x73, 0x20, 0x28,
+	0x0a, 0x4f, 0x36, 0x06, 0xff, 0x24, 0x9f, 0xc8, 0x59, 0xfc, 0x17, 0x00, 0x00, 0xff, 0xff, 0xae,
+	0x87, 0x4f, 0xcd, 0x4b, 0x03, 0x00, 0x00,
 }

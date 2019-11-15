@@ -8,7 +8,7 @@ import "firstmessage/firstmessage.proto";
 import "secondmessage/secondmessage.proto";
 
 message GeneralOneOf {
-    oneof MSg{
+    oneof Msg{
         firstmessage.FirstMessage fmsg = 1;
         secondmessage.SecondMessage smsg = 2;
         secondmessage.SecondMessage msg1 = 3;
