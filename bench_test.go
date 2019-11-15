@@ -1,10 +1,9 @@
 package main
 
 import (
-	"bytes"
+	"encoding/binary"
 	"log"
 	"math/rand"
-	"strconv"
 	"testing"
 	"time"
 
@@ -20,16 +19,20 @@ import (
 const (
 	constName   = "AnyRandomStructure"
 	bufferSize  = 20
-	eventsCount = 100
+	eventsCount = 1000
 	stringLimit = 20
 	intLimit    = 100000
 	nameBufferS = 20
 	vBufferS    = 2
-	sizeBufferS = 5
+	sizeBufferS = 4
 )
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
+}
+
+func convertByteToInt(in []byte) int {
+	return (int(in[0])<<24 | int(in[1])<<16 | int(in[2])<<8 | int(in[3]))
 }
 
 var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -92,7 +95,7 @@ func generateWrappedBytes(key string) []byte {
 	vBuffer := make([]byte, vBufferS, vBufferS)
 	copy(vBuffer[:], version)
 	sizeBuffer := make([]byte, sizeBufferS, sizeBufferS)
-	copy(sizeBuffer[:], strconv.Itoa(size))
+	binary.LittleEndian.PutUint32(sizeBuffer, uint32(size))
 	overallData := append(nameBuffer, vBuffer...)
 	overallData = append(overallData, sizeBuffer...)
 	overallData = append(overallData, data...)
@@ -646,16 +649,15 @@ func BenchmarkByteArray(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		index := 0
+		var err error
 		for index < len(events) {
 			// Get name
 			structName := string(events[index : index+nameBufferS])
 			index += nameBufferS
 			if structName == firstName {
 				index += vBufferS
-				size, err := strconv.Atoi(string(bytes.TrimRight(events[index:index+sizeBufferS], "\x00")))
-				if err != nil {
-					log.Fatal("error atoi")
-				}
+
+				size := int(binary.LittleEndian.Uint32(events[index : index+sizeBufferS]))
 				index += sizeBufferS
 				fmsg := firstmessage.FirstMessage{}
 				err = proto.Unmarshal(events[index:index+size], &fmsg)
@@ -670,10 +672,7 @@ func BenchmarkByteArray(b *testing.B) {
 			if structName == secondName {
 				// version := string(events[i : i+vBufferS])
 				index += vBufferS
-				size, err := strconv.Atoi(string(bytes.TrimRight(events[index:index+sizeBufferS], "\x00")))
-				if err != nil {
-					log.Fatal("error atoi")
-				}
+				size := int(binary.LittleEndian.Uint32(events[index : index+sizeBufferS]))
 				index += sizeBufferS
 				smsg := secondmessage.SecondMessage{}
 				err = proto.Unmarshal(events[index:index+size], &smsg)
