@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option go_package = "github.com/Akado2009/protobuf-substruct-benchmark/test-proto/generalarray";
+
+package general;
+
+import "general/general.proto";
+
+message GeneralArray {
+  repeated general.General gen_array = 1;
+}

@@ -599,6 +599,7 @@ func BenchmarkOneOfLargeInnerWoAllocation(b *testing.B) {
 }
 
 func BenchmarkGeneralArray(b *testing.B) {
+	events := generateGeneralArrays()
 }
 
 func BenchmarkByteArray(b *testing.B) {
