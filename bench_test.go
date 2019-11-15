@@ -2,7 +2,10 @@ package main
 
 import (
 	"log"
+	"math/rand"
+	"strconv"
 	"testing"
+	"time"
 
 	AnotherInnerStruct "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/generated-code/anotherinner"
 	InnerStruct "github.com/Akado2009/protobuf-substruct-benchmark/protobuf-struct/generated-code/inner"
@@ -20,9 +23,145 @@ import (
 )
 
 const (
-	constName  = "AnyRandomStructure"
-	bufferSize = 20
+	constName   = "AnyRandomStructure"
+	bufferSize  = 20
+	eventsCount = 100
+	stringLimit = 20
+	intLimit    = 100000
+	nameBufferS = 20
+	vBufferS    = 2
+	sizeBufferS = 5
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func randomString(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
+}
+
+func randomInt(n int) int {
+	return rand.Intn(n)
+}
+
+func generateRandomFirst() *firstmessage.FirstMessage {
+	inner := &firstmessage.FirstMessage{
+		Name:       randomString(stringLimit),
+		Id:         int32(randomInt(intLimit)),
+		SecondName: randomString(stringLimit),
+	}
+	return inner
+}
+
+func generateRandomSecond() *secondmessage.SecondMessage {
+	aInner := &secondmessage.SecondMessage{
+		Name:       randomString(stringLimit),
+		Id:         int32(randomInt(intLimit)),
+		SecondName: randomString(stringLimit),
+		ThirdName:  randomString(stringLimit),
+		IdFloat:    float32(randomInt(intLimit) / 3),
+		FourthName: randomString(stringLimit),
+		FifthName:  randomString(stringLimit),
+	}
+	return aInner
+}
+
+func generateWrappedBytes(key string) []byte {
+	var data []byte
+	var err error
+	if key == "first" {
+		data, err = proto.Marshal(generateRandomFirst())
+		if err != nil {
+			log.Fatal("marshaling error: ", err)
+		}
+	} else {
+		data, err = proto.Marshal(generateRandomSecond())
+		if err != nil {
+			log.Fatal("marshaling error: ", err)
+		}
+	}
+	size := len(data)
+	version := "1"
+
+	nameBuffer := make([]byte, nameBufferS, nameBufferS)
+	copy(nameBuffer[:], constName)
+	vBuffer := make([]byte, vBufferS, vBufferS)
+	copy(vBuffer[:], version)
+	sizeBuffer := make([]byte, sizeBufferS, sizeBufferS)
+	copy(sizeBuffer[:], strconv.Itoa(size))
+	overallData := append(nameBuffer, vBuffer...)
+	overallData = append(overallData, sizeBuffer...)
+	overallData = append(overallData, data...)
+
+	return overallData
+}
+
+func generateWrappedArrays(key string) []byte {
+	var data []byte
+	var err error
+	if key == "first" {
+		data, err = proto.Marshal(generateRandomFirst())
+		if err != nil {
+			log.Fatal("marshaling error: ", err)
+		}
+	} else {
+		data, err = proto.Marshal(generateRandomSecond())
+		if err != nil {
+			log.Fatal("marshaling error: ", err)
+		}
+	}
+	return data
+}
+
+func generateWrappedGeneral(key string) []byte {
+	generalStruct := general.General{}
+	if key == "first" {
+		generalStruct.Fmsg = generateRandomFirst()
+	} else {
+		generalStruct.Smsg = generateRandomSecond()
+	}
+	data, err := proto.Marshal(&generalStruct)
+	if err != nil {
+		log.Fatal("marshaling error: ", err)
+	}
+	return data
+}
+
+func generateEventsByte() []byte {
+	b := make([]byte, 0)
+	for i := 0; i < eventsCount/2; i++ {
+		b = append(b, generateWrappedBytes("first")...)
+		b = append(b, generateWrappedBytes("second")...)
+	}
+	return b
+}
+
+func generateEventsArrays() []byte {
+	b := make([]byte, 0)
+
+	for i := 0; i < eventsCount/2; i++ {
+		b = append(b, generateWrappedArrays("first")...)
+		b = append(b, generateWrappedArrays("second")...)
+	}
+	return b
+}
+
+func generateGeneralArrays() []byte {
+	b := make([]byte, 0)
+
+	for i := 0; i < eventsCount/2; i++ {
+		b = append(b, generateWrappedGeneral("first")...)
+		b = append(b, generateWrappedGeneral("second")...)
+	}
+	return b
+}
 
 func BenchmarkAnySmallInnerWoAllocation(b *testing.B) {
 	inner := &InnerStruct.InnerMessage{
@@ -457,4 +596,13 @@ func BenchmarkOneOfLargeInnerWoAllocation(b *testing.B) {
 		}
 
 	}
+}
+
+func BenchmarkGeneralArray(b *testing.B) {
+}
+
+func BenchmarkByteArray(b *testing.B) {
+}
+
+func BenchmarkArrayArray(b *testing.B) {
 }
